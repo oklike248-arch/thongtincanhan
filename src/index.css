@@ -1,0 +1,52 @@
+
+@import "tailwindcss";
+@tailwind utilities;
+
+/* Transition mượt khi đổi theme */
+* {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+/* Màu nền toàn site */
+html, body, #root { height: 100%; }
+body { @apply bg-white text-zinc-900; }
+.dark body { @apply bg-zinc-950 text-zinc-100; }
+
+/* Ví dụ hiệu ứng gradient toàn site (tùy chọn) */
+.site-gradient {
+  @apply bg-gradient-to-b from-white to-zinc-100 dark:from-zinc-950 dark:to-zinc-900;
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 700ms ease-out;
+  background: rgba(255, 255, 255, 0.4); /* sáng thì hiện rõ */
+  pointer-events: none;
+}
+
+.dark .ripple-circle {
+  background: rgba(0, 0, 0, 0.4); /* dark mode dùng ripple đen mờ */
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
