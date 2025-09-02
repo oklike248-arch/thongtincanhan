@@ -21,45 +21,35 @@ function scrollToId(id) {
   window.scrollTo({ top: y, behavior: "smooth" });
 }
 
-// ===== Theme toggle with localStorage
-function useTheme() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "dark";
-    return localStorage.getItem("theme") || (window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light");
-  });
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") root.classList.add("dark");
-    else root.classList.remove("dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-  return { theme, setTheme };
-}
-
-// ===== Badge
-const Badge = ({ children }) => (
-  <span className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium backdrop-blur-sm border-zinc-200/60 bg-white/60 text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300">
-    {children}
-  </span>
-);
-
-// ===== Card
-const Card = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border shadow-sm border-zinc-200 bg-white/80 p-5 dark:border-zinc-800 dark:bg-zinc-900/70 ${className}`}>{children}</div>
-);
-
-const SectionTitle = ({ eyebrow, title, desc }) => (
-  <div className="mb-8 text-center">
-    {eyebrow && <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400">{eyebrow}</p>}
-    <h2 className="mt-1 text-2xl font-semibold sm:text-3xl text-zinc-900 dark:text-zinc-100">{title}</h2>
-    {desc && <p className="mt-3 text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">{desc}</p>}
-  </div>
-);
-
 // ===== Navbar
 function Navbar() {
-  const { theme, setTheme } = useTheme();
+  const [theme, setTheme] = useState("light");
   const [open, setOpen] = useState(false);
+
+  // Lấy theme từ localStorage khi load
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+    } else {
+      setTheme("light");
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  // Toggle theme
+  const safeToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   const links = [
     { name: "Home", id: "home" },
@@ -80,7 +70,11 @@ function Navbar() {
       ? "bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-purple-500"
       : "bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500";
 
-  const safeToggle = () => setTheme(theme === "dark" ? "light" : "dark");
+  // scroll smooth
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <header
@@ -92,9 +86,13 @@ function Navbar() {
           <div className="flex items-center gap-3">
             <div
               className={`h-11 w-11 rounded-full overflow-hidden ring-2 cursor-pointer transition 
-                ${theme === "dark" ? "ring-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.8)]" : "ring-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]"}`}
+                ${
+                  theme === "dark"
+                    ? "ring-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.8)]"
+                    : "ring-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]"
+                }`}
             >
-              <img src="./public/ava.jpg" alt="avatar" className="object-cover" />
+              <img src="./ava.jpg" alt="avatar" className="object-cover" />
             </div>
             <span
               className={`font-extrabold text-lg tracking-wide bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(236,72,153,0.7)] ${textGradient}`}
@@ -104,43 +102,42 @@ function Navbar() {
           </div>
 
           {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-6">
-              {links.map((l) => (
-                <button
-                  key={l.id}
-                  onClick={() => scrollToId(l.id)}
-                  className={`cursor-pointer relative text-sm font-semibold transition-all duration-300 ease-in-out
-                    ${theme === "dark" ? "text-white/80" : "text-black/80"}
-                     hover:bg-clip-text hover:text-transparent
-                    ${
-                     theme === "dark"
-                        ? "hover:bg-gradient-to-r hover:from-cyan-300 hover:via-fuchsia-400 hover:to-purple-500"
-                        : "hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600"
-                    }
-                    after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
-                    after:rounded-full after:transition-all after:duration-500
-                    ${
-                      theme === "dark"
-                        ? "after:bg-gradient-to-r after:from-cyan-400 after:to-purple-500 hover:after:w-full"
-                        : "after:bg-gradient-to-r after:from-pink-500 after:to-orange-500 hover:after:w-full"
-                    }
-                  `}
-                >
-                  {l.name}
-                </button>
-              ))}
-              
+          <nav className="hidden md:flex items-center gap-6">
+            {links.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => scrollToId(l.id)}
+                className={`cursor-pointer relative text-sm font-semibold transition-all duration-300 ease-in-out
+                  ${theme === "dark" ? "text-white/80" : "text-black/80"}
+                   hover:bg-clip-text hover:text-transparent
+                  ${
+                    theme === "dark"
+                      ? "hover:bg-gradient-to-r hover:from-cyan-300 hover:via-fuchsia-400 hover:to-purple-500"
+                      : "hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600"
+                  }
+                  after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
+                  after:rounded-full after:transition-all after:duration-500
+                  ${
+                    theme === "dark"
+                      ? "after:bg-gradient-to-r after:from-cyan-400 after:to-purple-500 hover:after:w-full"
+                      : "after:bg-gradient-to-r after:from-pink-500 after:to-orange-500 hover:after:w-full"
+                  }
+                `}
+              >
+                {l.name}
+              </button>
+            ))}
 
-          {/* Theme toggle */}
-          <button
-            onClick={safeToggle}
-            className="cursor-pointer rounded-full p-2 bg-white/10 border border-white/20 hover:bg-white/20 
-            shadow-[0_0_10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)] transition"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? "☀️" : "🌙"}
-          </button>
-        </nav>
+            {/* Theme toggle */}
+            <button
+              onClick={safeToggle}
+              className="cursor-pointer rounded-full p-2 bg-white/10 border border-white/20 hover:bg-white/20 
+              shadow-[0_0_10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)] transition"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
+          </nav>
 
           {/* Mobile nav toggle */}
           <div className="md:hidden flex items-center gap-2">
@@ -180,7 +177,7 @@ function Navbar() {
                 key={l.id}
                 onClick={() => {
                   setOpen(false);
-                  (l.id);
+                  scrollToId(l.id);
                 }}
                 className="cursor-pointer w-full rounded-xl px-3 py-2 text-left text-white/90 
                 hover:bg-white/10 hover:text-cyan-300 hover:shadow-[0_0_10px_rgba(34,211,238,0.6)] transition"
@@ -194,6 +191,8 @@ function Navbar() {
     </header>
   );
 }
+
+
 
 // ===== Hero
 function Hero() {
@@ -238,7 +237,7 @@ function Hero() {
   ];
 
   return (
-    <section id="home" className="relative overflow-hidden">
+    <section id="home" className="relative overflow-hidden scroll-mt-24 py-15">
       {/* Background Blur */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div
@@ -255,11 +254,11 @@ function Hero() {
             {/* Badge */}
             <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full 
                             border border-zinc-200 dark:border-zinc-700 
-                          bg-zinc-50 dark:bg-zinc-900 
+                            bg-zinc-50 dark:bg-zinc-900 
                             text-xs font-semibold text-zinc-700 dark:text-zinc-200 
                             shadow-sm select-none">
-                              <span className="h-2 w-2 bg-green-400 rounded-full"></span>
-                        Open to work • Full-Stack
+              <span className="h-2 w-2 bg-green-400 rounded-full"></span>
+              Open to work • Full-Stack
             </div>
 
             {/* Title */}
@@ -337,9 +336,9 @@ function Hero() {
           </div>
 
           {/* Right: Avatar */}
-          <div className="flex justify-center pl-6">
+          <div className="flex justify-center">
             <div className="rounded-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-spin-slow hover:[animation-play-state:paused]">
-              <div className="w-36 h-36 sm:w-80 sm:h-80 lg:w-110 lg:h-110 rounded-full overflow-hidden bg-white dark:bg-zinc-900 shadow-xl">
+              <div className="w-36 h-36 sm:w-80 sm:h-80 lg:w-[26rem] lg:h-[26rem] rounded-full overflow-hidden bg-white dark:bg-zinc-900 shadow-xl">
                 <img
                   src="/cafe.jpg"
                   alt="Avatar"
@@ -379,7 +378,7 @@ function About() {
   ];
 
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 sm:px-6 py-20">
+    <section id="about" className="mx-auto max-w-6xl px-4 sm:px-6 py-28 scroll-mt-24">
       {/* Section Title */}
       <div className="text-center max-w-2xl mx-auto">
         <p className="text-sm font-semibold uppercase text-indigo-500">Giới thiệu</p>
@@ -469,7 +468,7 @@ import { useInView } from "react-intersection-observer";
 import { FaReact, FaNodeJs, FaAws, FaDocker } from "react-icons/fa";
 
 function Skills() {
-  // Skills data
+  // Danh sách skill
   const skills = [
     { name: "React", level: 90, icon: <FaReact className="text-sky-500" />, color: "from-sky-400 to-sky-600" },
     { name: "Next.js", level: 85, icon: <SiNextdotjs className="text-white" />, color: "from-zinc-300 to-zinc-500" },
@@ -481,7 +480,7 @@ function Skills() {
     { name: "AWS", level: 65, icon: <FaAws className="text-orange-500" />, color: "from-yellow-400 to-orange-600" },
   ];
 
-  // Sub component
+  // Thanh progress
   const ProgressBar = ({ level, inView, color }) => (
     <div className="relative w-full h-2 rounded-full bg-zinc-700 overflow-hidden">
       <motion.div
@@ -495,6 +494,7 @@ function Skills() {
     </div>
   );
 
+  // Thẻ skill card
   const SkillCard = ({ skill, index }) => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
@@ -519,12 +519,11 @@ function Skills() {
   };
 
   return (
-    <div className="min-h-screen bg-black py-20">
-      {/* Section Skills */}
-      <section id="skills" className="mx-auto max-w-6xl px-4 sm:px-1 py-20 pb-32">
+    <section id="skills" className="min-h-screen py-20 bg-white dark:bg-black">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center mb-12">
-          <p className="text-sm font-semibold uppercase text-indigo-400">Kỹ năng</p>
-          <h2 className="text-3xl font-bold tracking-tight text-white mt-2">
+          <p className="text-sm font-semibold uppercase text-indigo-500">Kỹ năng</p>
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mt-2">
             Tôi sử dụng hằng ngày
           </h2>
         </div>
@@ -534,7 +533,7 @@ function Skills() {
             <SkillCard key={s.name} skill={s} index={i} />
           ))}
         </div>
-      </section>
+      </div>
 
       {/* Shimmer keyframes */}
       <style>{`
@@ -546,9 +545,10 @@ function Skills() {
           animation: shimmer 1.5s infinite;
         }
       `}</style>
-    </div>
+    </section>
   );
 }
+
 
 
 // ===== Projects
@@ -668,6 +668,36 @@ function Projects() {
     </section>
   );
 }
+
+
+function SectionTitle({ eyebrow, title }) {
+  return (
+    <div className="text-center mb-16">
+      <p className="text-sm font-semibold text-pink-400">{eyebrow}</p>
+      <h2 className="text-3xl font-extrabold bg-gradient-to-r from-fuchsia-500 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+function Card({ children, className }) {
+  return (
+    <div
+      className={`rounded-2xl p-6 backdrop-blur-xl bg-white/10 dark:bg-zinc-900/40 border border-white/10 transition-all ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
 
 
 // ===== Experience Timeline (Modern)
@@ -947,7 +977,6 @@ function Contact() {
 
 // ===== Footer
 import { Github, Linkedin, Twitter } from "lucide-react";
-
 function Footer() {
   return (
     <motion.footer
@@ -997,9 +1026,6 @@ function Footer() {
     </motion.footer>
   );
 }
-
-
-
 
 export default function PortfolioPage() {
   return (
