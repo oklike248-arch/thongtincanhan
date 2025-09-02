@@ -6,7 +6,7 @@
 
 
 <p align="center">
-  Một trang web giới thiệu bản thân với framework
+  Một trang web giới thiệu bản thân với
   <a href="https://vite.dev/">Vite</a> và được deploy trên <a href="https://vercel.com/">Vercel</a>.
 </p>
 
