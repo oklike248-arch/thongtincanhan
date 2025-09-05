@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { ThemeProvider } from "./theme";
+import { ThemeProvider } from "./theme.tsx"; // import .tsx vẫn ok
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

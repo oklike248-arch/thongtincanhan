@@ -7,92 +7,75 @@ import {
   SiTailwindcss,
   SiPostgresql,
 } from "react-icons/si";
+import { FaAws, FaDocker, FaGithub } from "react-icons/fa";
 
 function Hero() {
-  // Danh sách skill
   const skills = [
-    {
-      name: "React",
-      icon: <SiReact size={28} />,
-      className:
-        "from-blue-400 to-cyan-400 shadow-[0_6px_18px_rgba(59,130,246,0.12)] hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]",
-    },
-    {
-      name: "Next.js",
-      icon: <SiNextdotjs size={28} />,
-      className:
-        "from-gray-800 to-gray-600 shadow-[0_6px_18px_rgba(107,114,128,0.08)] hover:shadow-[0_0_30px_rgba(107,114,128,0.18)]",
-    },
-    {
-      name: "TS",
-      icon: <SiTypescript size={28} />,
-      className:
-        "from-blue-500 to-blue-600 shadow-[0_6px_18px_rgba(37,99,235,0.12)] hover:shadow-[0_0_30px_rgba(37,99,235,0.25)]",
-    },
-    {
-      name: "Node.js",
-      icon: <SiNodedotjs size={28} />,
-      className:
-        "from-green-500 to-green-600 shadow-[0_6px_18px_rgba(34,197,94,0.12)] hover:shadow-[0_0_30px_rgba(34,197,94,0.25)]",
-    },
-    {
-      name: "Tailwind",
-      icon: <SiTailwindcss size={28} />,
-      className:
-        "from-cyan-400 to-blue-400 shadow-[0_6px_18px_rgba(6,182,212,0.10)] hover:shadow-[0_0_30px_rgba(6,182,212,0.25)]",
-    },
-    {
-      name: "Postgres",
-      icon: <SiPostgresql size={28} />,
-      className:
-        "from-indigo-600 to-blue-700 shadow-[0_6px_18px_rgba(79,70,229,0.10)] hover:shadow-[0_0_30px_rgba(79,70,229,0.25)]",
-    },
+    { icon: <SiReact size={22} />, pos: "top-6 left-[12%]", from: "from-sky-400", to: "to-cyan-400" },
+    { icon: <SiNextdotjs size={22} />, pos: "top-14 right-[20%]", from: "from-gray-800", to: "to-gray-600" },
+    { icon: <SiTypescript size={22} />, pos: "top-[45%] left-0", from: "from-blue-500", to: "to-blue-600" },
+    { icon: <SiNodedotjs size={22} />, pos: "bottom-[35%] right-0", from: "from-green-500", to: "to-green-600" },
+    { icon: <SiTailwindcss size={22} />, pos: "bottom-10 left-[20%]", from: "from-cyan-400", to: "to-blue-400" },
+    { icon: <SiPostgresql size={22} />, pos: "bottom-16 right-[18%]", from: "from-indigo-600", to: "to-blue-700" },
+    { icon: <FaAws size={22} />, pos: "top-[28%] right-[5%]", from: "from-yellow-400", to: "to-orange-500" },
+    { icon: <FaDocker size={22} />, pos: "bottom-[22%] left-[8%]", from: "from-sky-500", to: "to-blue-600" },
+    { icon: <FaGithub size={22} />, pos: "top-[60%] right-[10%]", from: "from-zinc-700", to: "to-black" },
   ];
 
   return (
-    <section id="home" className="relative overflow-hidden scroll-mt-24 py-15">
-      {/* Background Blur */}
+    <section id="home" className="relative overflow-hidden scroll-mt-24 py-24 sm:py-28">
+      {/* Background blur */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div
-          className="absolute -top-24 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full blur-3xl
+          className="absolute -top-28 left-1/2 h-[26rem] w-[46rem] -translate-x-1/2 rounded-full blur-3xl
                      bg-gradient-to-br from-indigo-400/30 via-sky-300/30 to-emerald-300/30
                      dark:from-indigo-600/20 dark:via-sky-600/20 dark:to-emerald-600/20"
         />
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-20">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* Left: text + buttons + skills */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left: text */}
           <div>
-            {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full 
-                            border border-zinc-200 dark:border-zinc-700 
-                            bg-zinc-50 dark:bg-zinc-900 
-                            text-xs font-semibold text-zinc-700 dark:text-zinc-200 
-                            shadow-sm select-none">
-              <span className="h-2 w-2 bg-green-400 rounded-full"></span>
+            <div
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full 
+                          border border-zinc-200 dark:border-zinc-700 
+                          bg-zinc-50 dark:bg-zinc-900 
+                          text-xs font-semibold text-zinc-700 dark:text-zinc-200 
+                          shadow-sm select-none hover:shadow-[0_0_20px_rgba(34,197,94,0.6)]
+                          transition-all duration-300"
+            >
+              <span className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></span>
               Open to work • Full-Stack
             </div>
 
-            {/* Title */}
-            <h1 className="mt-3 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-zinc-900 dark:text-zinc-50">
-              Xin chào, tôi là{" "}
-              <span className="bg-gradient-to-r from-indigo-500 to-emerald-500 bg-clip-text text-transparent animate-text-gradient">
+            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-extrabold leading-tight">
+              <span
+                className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                             bg-clip-text text-transparent animate-text-gradient
+                             drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
+              >
+                Xin chào, tôi là
+              </span>{" "}
+              <span
+                className="bg-gradient-to-r from-indigo-500 to-emerald-500 
+                             bg-clip-text text-transparent animate-text-gradient
+                             drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
+              >
                 Minh Ngọc
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="mt-4 max-w-xl text-base sm:text-lg text-zinc-600 dark:text-zinc-400">
+            <p className="mt-5 max-w-xl text-lg sm:text-xl text-zinc-600 dark:text-zinc-400">
               Lập trình viên web chuyên React, Next.js, Node.js. Tôi xây dựng sản phẩm nhanh, gọn và đẹp.
             </p>
 
             {/* Buttons */}
-            <div className="mt-6 flex flex-wrap gap-5">
+            <div className="mt-8 flex flex-wrap gap-6">
               <a
                 href="#projects"
                 className="relative inline-flex items-center justify-center 
-                           rounded-2xl px-6 py-3 font-semibold text-white
+                           rounded-2xl px-7 py-3.5 font-semibold text-white
                            bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400
                            transition-all duration-300 hover:-translate-y-1 hover:brightness-110
                            shadow-[0_0_15px_rgba(236,72,153,0.5)]
@@ -104,7 +87,7 @@ function Hero() {
               <a
                 href="#contact"
                 className="relative inline-flex items-center justify-center 
-                           rounded-2xl px-6 py-3 font-semibold text-white
+                           rounded-2xl px-7 py-3.5 font-semibold text-white
                            bg-gradient-to-r from-green-400 via-teal-400 to-blue-500
                            transition-all duration-300 hover:-translate-y-1 hover:brightness-110
                            shadow-[0_0_15px_rgba(34,197,94,0.5)]
@@ -114,9 +97,11 @@ function Hero() {
               </a>
 
               <a
-                href="/cv.pdf"
+                href="/CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative inline-flex items-center justify-center 
-                           rounded-2xl px-6 py-3 font-semibold text-white
+                           rounded-2xl px-7 py-3.5 font-semibold text-white
                            bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500
                            transition-all duration-300 hover:-translate-y-1 hover:brightness-110
                            shadow-[0_0_15px_rgba(250,204,21,0.5)]
@@ -125,40 +110,60 @@ function Hero() {
                 📄 Tải CV
               </a>
             </div>
-
-            {/* Skills */}
-            <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
-              {skills.map((skill, i) => (
-                <div
-                  key={i}
-                  className={`relative group flex flex-col items-center justify-center rounded-2xl p-6 text-white cursor-default transition-all duration-300 bg-gradient-to-r ${skill.className} hover:scale-110`}
-                >
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                  <div className="relative flex flex-col items-center">
-                    <div className="text-4xl transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110">
-                      {skill.icon}
-                    </div>
-                    <span className="mt-2 text-sm font-semibold">{skill.name}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
-          {/* Right: Avatar */}
-          <div className="flex justify-center">
-            <div className="rounded-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-spin-slow hover:[animation-play-state:paused]">
-              <div className="w-36 h-36 sm:w-80 sm:h-80 lg:w-[26rem] lg:h-[26rem] rounded-full overflow-hidden bg-white dark:bg-zinc-900 shadow-xl">
-                <img
-                  src="/cafe.jpg"
-                  alt="Avatar"
-                  className="w-full h-full object-cover rounded-full"
-                />
+          {/* Right: avatar + floating badges */}
+          <div className="relative flex justify-center items-center">
+            {/* Avatar floating */}
+            <div className="animate-float">
+              <div className="rounded-full p-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                <div className="w-48 h-48 sm:w-80 sm:h-80 lg:w-[26rem] lg:h-[26rem] rounded-full overflow-hidden bg-white dark:bg-zinc-900 shadow-xl">
+                  <img src="/cafe.jpg" alt="Avatar" className="w-full h-full object-cover rounded-full" />
+                </div>
               </div>
             </div>
+
+            {/* Badges floating (only show on desktop) */}
+            {skills.map((skill, i) => (
+              <div key={i} className={`absolute ${skill.pos} animate-bounce-slow hidden lg:block`}>
+                <div
+                  className={`p-3 rounded-xl text-white shadow-md 
+                              bg-gradient-to-r ${skill.from} ${skill.to}
+                              transition-all duration-300 hover:scale-110 hover:rotate-6 hover:brightness-125`}
+                >
+                  {skill.icon}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Custom animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-14px); }
+        }
+        .animate-float {
+          animation: float 5s ease-in-out infinite;
+        }
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-bounce-slow {
+          animation: bounce-slow 7s ease-in-out infinite;
+        }
+        @keyframes text-gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .animate-text-gradient {
+          background-size: 200% auto;
+          animation: text-gradient 4s ease infinite;
+        }
+      `}</style>
     </section>
   );
 }

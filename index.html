@@ -5,11 +5,24 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Port</title>
+
+    <!-- Script load theme -->
+    <script>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
-  <body>
+  <body class="transition-colors duration-500">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Icon library (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
   </body>
 </html>
-
-<script src="https://unpkg.com/lucide@latest"></script>

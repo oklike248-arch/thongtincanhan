@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Navbar() {
-  const [theme, setTheme] = useState("light");
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "dark") {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const safeToggle = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
+  const [theme, setTheme] = useState(
+    document.documentElement.classList.contains("dark") ? "dark" : "light"
+  );
 
   const links = [
     { name: "Home", id: "home" },
@@ -36,41 +15,42 @@ function Navbar() {
     { name: "Contact", id: "contact" },
   ];
 
-  const bgGradient =
-    theme === "dark"
-      ? "bg-gradient-to-r from-indigo-900/70 via-purple-900/70 to-pink-900/70"
-      : "bg-gradient-to-r from-cyan-400/80 via-pink-400/80 to-orange-400/80";
-
-  const textGradient =
-    theme === "dark"
-      ? "bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-purple-500"
-      : "bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500";
-
   const scrollToId = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-white/20 backdrop-blur-xl shadow-lg ${bgGradient}`}
+      className={`navbar-blur ${
+        theme === "dark" ? "navbar-gradient-dark" : "navbar-gradient-light"
+      }`}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div
-              className={`h-11 w-11 rounded-full overflow-hidden ring-2 cursor-pointer transition 
-                ${
-                  theme === "dark"
-                    ? "ring-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.8)]"
-                    : "ring-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]"
-                }`}
+              className="h-11 w-11 rounded-full overflow-hidden ring-2 cursor-pointer transition 
+                         ring-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.8)]
+                         dark:ring-purple-500 dark:hover:shadow-[0_0_15px_rgba(168,85,247,0.8)]"
             >
-              <img src="./public/ava.jpg" alt="avatar" className="object-cover" />
+              <img src="/ava.jpg" alt="logo" className="object-cover w-full h-full" />
             </div>
             <span
-              className={`font-extrabold text-lg tracking-wide bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(236,72,153,0.7)] ${textGradient}`}
+              className="font-extrabold text-lg tracking-wide bg-clip-text text-transparent 
+                         bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500
+                         dark:from-cyan-400 dark:via-fuchsia-400 dark:to-purple-500"
             >
               NekoTheDev
             </span>
@@ -79,35 +59,16 @@ function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6">
             {links.map((l) => (
-              <button
-                key={l.id}
-                onClick={() => scrollToId(l.id)}
-                className={`cursor-pointer relative text-sm font-semibold transition-all duration-300 ease-in-out
-                  ${theme === "dark" ? "text-white/80" : "text-black/80"}
-                   hover:bg-clip-text hover:text-transparent
-                  ${
-                    theme === "dark"
-                      ? "hover:bg-gradient-to-r hover:from-cyan-300 hover:via-fuchsia-400 hover:to-purple-500"
-                      : "hover:bg-gradient-to-r hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600"
-                  }
-                  after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
-                  after:rounded-full after:transition-all after:duration-500
-                  ${
-                    theme === "dark"
-                      ? "after:bg-gradient-to-r after:from-cyan-400 after:to-purple-500 hover:after:w-full"
-                      : "after:bg-gradient-to-r after:from-pink-500 after:to-orange-500 hover:after:w-full"
-                  }
-                `}
-              >
+              <button key={l.id} onClick={() => scrollToId(l.id)} className="nav-link">
                 {l.name}
               </button>
             ))}
 
             {/* Theme toggle */}
             <button
-              onClick={safeToggle}
+              onClick={toggleTheme}
               className="cursor-pointer rounded-full p-2 bg-white/10 border border-white/20 hover:bg-white/20 
-              shadow-[0_0_10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)] transition"
+                         shadow-[0_0_10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_15px_rgba(236,72,153,0.8)] transition"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? "☀️" : "🌙"}
@@ -117,9 +78,9 @@ function Navbar() {
           {/* Mobile nav toggle */}
           <div className="md:hidden flex items-center gap-2">
             <button
-              onClick={safeToggle}
+              onClick={toggleTheme}
               className="cursor-pointer rounded-full p-2 bg-white/10 border border-white/20 hover:bg-white/20 
-              shadow-[0_0_10px_rgba(34,211,238,0.6)] hover:shadow-[0_0_15px_rgba(34,211,238,0.8)] transition"
+                         shadow-[0_0_10px_rgba(34,211,238,0.6)] hover:shadow-[0_0_15px_rgba(34,211,238,0.8)] transition"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? "☀️" : "🌙"}
@@ -127,7 +88,7 @@ function Navbar() {
             <button
               onClick={() => setOpen((v) => !v)}
               className="cursor-pointer rounded-lg p-2 bg-white/10 border border-white/20 hover:bg-white/20 
-              shadow-[0_0_10px_rgba(147,51,234,0.6)] hover:shadow-[0_0_15px_rgba(147,51,234,0.8)] transition"
+                         shadow-[0_0_10px_rgba(147,51,234,0.6)] hover:shadow-[0_0_15px_rgba(147,51,234,0.8)] transition"
               aria-label="Open menu"
             >
               <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 text-white">
@@ -145,7 +106,8 @@ function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-white/20 animate-slide-down bg-black/30 backdrop-blur-lg">
+        <div className="md:hidden border-t border-white/20 animate-slide-down 
+                        bg-white/30 dark:bg-black/30 backdrop-blur-lg">
           <div className="mx-auto max-w-6xl px-4 py-4 flex flex-col gap-2">
             {links.map((l) => (
               <button
@@ -154,8 +116,10 @@ function Navbar() {
                   setOpen(false);
                   scrollToId(l.id);
                 }}
-                className="cursor-pointer w-full rounded-xl px-3 py-2 text-left text-white/90 
-                hover:bg-white/10 hover:text-cyan-300 hover:shadow-[0_0_10px_rgba(34,211,238,0.6)] transition"
+                className="cursor-pointer w-full rounded-xl px-3 py-2 text-left 
+                           text-black/90 dark:text-white/90
+                           hover:bg-white/10 hover:text-cyan-300 
+                           hover:shadow-[0_0_10px_rgba(34,211,238,0.6)] transition"
               >
                 {l.name}
               </button>

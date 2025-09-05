@@ -26,11 +26,11 @@ function Projects() {
     },
   ];
 
-  // 🎨 Màu riêng cho từng tag
+  // 🎨 Màu riêng cho từng tag (có dark mode)
   const tagColors = {
     React: "from-cyan-500 to-blue-500 text-white",
     TypeScript: "from-sky-500 to-indigo-500 text-white",
-    "Next.js": "from-zinc-900 to-zinc-700 text-white",
+    "Next.js": "from-zinc-900 to-zinc-700 text-white dark:from-white dark:to-zinc-200 dark:text-black",
     Tailwind: "from-teal-400 to-cyan-500 text-white",
     PostgreSQL: "from-blue-600 to-sky-700 text-white",
     Stripe: "from-purple-500 to-indigo-500 text-white",
@@ -65,19 +65,28 @@ function Projects() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: i * 0.2 }}
             whileHover={{ scale: 1.03 }}
-            className="flex flex-col p-6 rounded-2xl bg-gradient-to-br from-zinc-50/80 to-white/90 dark:from-zinc-900/80 dark:to-zinc-950/90 border border-zinc-200 dark:border-zinc-700 shadow-xl hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.6)] transition-all duration-500"
+            className="flex flex-col p-6 rounded-2xl 
+              bg-gradient-to-br from-white to-zinc-50 
+              dark:from-zinc-900/80 dark:to-zinc-950/90 
+              border border-zinc-200 dark:border-zinc-700 
+              shadow-xl hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.6)] 
+              transition-all duration-500"
           >
             {/* Fake thumbnail */}
             <motion.div
-              className="aspect-video w-full rounded-xl mb-5 bg-gradient-to-tr from-pink-400/40 via-purple-400/30 to-indigo-400/40 dark:from-pink-600/30 dark:via-purple-600/20 dark:to-indigo-600/30"
+              className="aspect-video w-full rounded-xl mb-5 
+                bg-gradient-to-tr from-pink-400/40 via-purple-400/30 to-indigo-400/40 
+                dark:from-pink-600/30 dark:via-purple-600/20 dark:to-indigo-600/30"
               whileHover={{ scale: 1.05 }}
-            />
+            >
+              <div className="flex items-center justify-center h-full text-4xl">📷</div>
+            </motion.div>
 
             {/* Title & Desc */}
-            <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+            <h3 className="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
               {p.title}
             </h3>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="mt-2 text-base text-zinc-700 dark:text-zinc-400 leading-relaxed">
               {p.desc}
             </p>
 
@@ -87,8 +96,7 @@ function Projects() {
                 <span
                   key={t}
                   className={`px-3 py-1 text-xs rounded-full bg-gradient-to-r ${
-                    tagColors[t] ||
-                    "from-gray-400 to-gray-500 text-white"
+                    tagColors[t] || "from-gray-400 to-gray-500 text-white"
                   } shadow-md`}
                 >
                   {t}
@@ -101,14 +109,20 @@ function Projects() {
               <motion.a
                 href={p.demo}
                 whileHover={{ scale: 1.07 }}
-                className="rounded-xl px-4 py-2 text-sm font-medium bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md hover:shadow-lg transition-all"
+                className="rounded-xl px-4 py-2 text-sm font-medium 
+                  bg-gradient-to-r from-indigo-500 to-purple-600 
+                  text-white shadow-md hover:shadow-lg transition-all"
               >
                 🚀 Demo
               </motion.a>
               <motion.a
                 href={p.code}
                 whileHover={{ scale: 1.07 }}
-                className="rounded-xl px-4 py-2 text-sm font-medium border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="rounded-xl px-4 py-2 text-sm font-medium 
+                  border border-zinc-300 dark:border-zinc-700 
+                  text-zinc-900 dark:text-zinc-200 
+                  hover:bg-zinc-100 dark:hover:bg-zinc-800 
+                  transition-colors"
               >
                 💻 Code
               </motion.a>

@@ -1,5 +1,7 @@
 // src/components/Footer.jsx
-import { motion } from "framer-motion"; // ✅ thiếu import
+"use client";
+
+import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter } from "lucide-react";
 
 function Footer() {
@@ -9,43 +11,36 @@ function Footer() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true }}
-      className="border-t border-zinc-200 dark:border-zinc-800 relative"
+      className="relative border-t border-zinc-200 dark:border-zinc-800 overflow-hidden"
     >
-      {/* Glow background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10 blur-3xl opacity-70" />
+      {/* Animated Glow background */}
+      <div className="absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10 blur-3xl opacity-60" />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 text-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 text-sm flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-6">
         {/* Copyright */}
-        <div className="font-medium bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+        <div className="text-center md:text-left font-medium bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
           © {new Date().getFullYear()} NekoTheDev. All rights reserved.
         </div>
 
         {/* Social links */}
-        <div className="flex items-center gap-5">
-          <a
-            href="https://github.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition transform hover:scale-110"
-          >
-            <Github className="w-5 h-5" />
-          </a>
-          <a
-            href="https://linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition transform hover:scale-110"
-          >
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a
-            href="https://twitter.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition transform hover:scale-110"
-          >
-            <Twitter className="w-5 h-5" />
-          </a>
+        <div className="flex justify-center md:justify-end items-center gap-6">
+          {[
+            { icon: Github, href: "https://github.com/" },
+            { icon: Linkedin, href: "https://linkedin.com/" },
+            { icon: Twitter, href: "https://twitter.com/" },
+          ].map(({ icon: Icon, href }, i) => (
+            <motion.a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.2, rotate: 8 }}
+              whileTap={{ scale: 0.95 }}
+              className="text-zinc-500 hover:text-zinc-900 dark:hover:text-emerald-300 transition-colors"
+            >
+              <Icon className="w-6 h-6 sm:w-5 sm:h-5" />
+            </motion.a>
+          ))}
         </div>
       </div>
     </motion.footer>

@@ -4,20 +4,27 @@ import Hero from "./assets/components/Hero.jsx";
 import About from "./assets/components/About.jsx";
 import Skills from "./assets/components/Skills.jsx";
 import Projects from "./assets/components/Projects.jsx";
-import Experience from "./assets/components/exptl.jsx"; 
+import Experience from "./assets/components/exptl.jsx";
 import Contact from "./assets/components/Contact.jsx";
 import Footer from "./assets/components/Footer.jsx";
 
 function App() {
   return (
-    <div className="bg-white dark:bg-black text-zinc-900 dark:text-white">
+    <div className="font-sans bg-lightBg dark:bg-darkBg text-zinc-900 dark:text-zinc-100">
+      {/* Navbar */}
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
+
+      {/* Sections */}
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

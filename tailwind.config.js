@@ -1,13 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", // ✅ ép Tailwind dark mode dựa trên class "dark"
+  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
-      fontFamily: { sans: ["Inter", "sans-serif"] },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
       keyframes: {
         borderLoop: {
           "0%": { backgroundPosition: "0% 50%" },
@@ -15,16 +17,26 @@ export default {
           "100%": { backgroundPosition: "0% 50%" },
         },
         shimmer: {
-          "0%,100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        fadeDown: {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         borderLoop: "borderLoop 3s linear infinite",
-        shimmer: "shimmer 3s ease-in-out infinite",
+        shimmer: "shimmer 2s linear infinite",
+        fadeDown: "fadeDown 0.5s ease-out forwards",
+      },
+      colors: {
+        cream: "#FFFDF5",     // nền sáng
+        blackpure: "#000000", // nền tối
+        lightBg: "#ffffff",
+        darkBg: "#0a0a0a",
       },
     },
   },
   plugins: [],
 };
-
