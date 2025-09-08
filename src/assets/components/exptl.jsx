@@ -8,13 +8,13 @@ function SectionTitle({ title, eyebrow }) {
   return (
     <div className="text-center mb-12">
       {eyebrow && (
-        <div className="text-sm uppercase tracking-widest text-pink-600 dark:text-pink-400 mb-2">
+        <div className="text-sm uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2">
           {eyebrow}
         </div>
       )}
       <h2
         className="text-3xl font-extrabold 
-                   bg-gradient-to-r from-fuchsia-500 via-indigo-500 to-cyan-400 
+                   bg-gradient-to-r from-emerald-500 via-green-500 to-teal-400 
                    bg-clip-text text-transparent"
       >
         {title}
@@ -62,24 +62,16 @@ function Experience() {
   return (
     <section
       id="experience"
-      className="mx-auto max-w-6xl px-4 sm:px-6 py-20 relative"
+      className="mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28 relative"
       ref={containerRef}
     >
       <SectionTitle eyebrow="Kinh nghiệm" title="Hành trình làm việc" />
 
-      <div className="relative">
-        {/* Timeline base line */}
+      <div className="relative overflow-hidden">
+        {/* Single baseline */}
         <div
-          className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 
-          bg-zinc-300 dark:bg-zinc-700/30 rounded-full"
-        />
-
-        {/* Progress line */}
-        <motion.div
-          style={{ scaleY: progress }}
-          className="origin-top absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 
-                     bg-gradient-to-b from-pink-500 via-violet-500 to-cyan-400 
-                     shadow-[0_0_12px_rgba(236,72,153,0.4)] rounded-full"
+          className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 
+          bg-gradient-to-b from-emerald-500/70 via-teal-400/60 to-sky-400/70 rounded-full"
         />
 
         {/* Timeline items */}
@@ -110,14 +102,14 @@ function Experience() {
               >
                 {/* Marker với tooltip */}
                 <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 360 }}
-                  transition={{ duration: 0.8, type: "spring" }}
+                  initial={{ scale: 0, rotate: -90 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, type: "spring" }}
                   viewport={{ amount: 0.3 }}
-                  className="group absolute left-1/2 top-5 flex items-center justify-center 
-                    h-10 w-10 -translate-x-1/2 rounded-full 
-                    bg-gradient-to-tr from-fuchsia-500 to-cyan-400 
-                    shadow-[0_0_25px_rgba(139,92,246,0.6)] cursor-pointer"
+                  className="group absolute left-1/2 top-5 hidden sm:flex items-center justify-center 
+                    h-8 w-8 -translate-x-1/2 rounded-full ring-2 ring-white/70 
+                    bg-gradient-to-tr from-emerald-500 to-teal-400 
+                    shadow-[0_0_18px_rgba(16,185,129,0.45)] cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,17 +136,17 @@ function Experience() {
 
                 {/* Card */}
                 <Card
-                  className={`hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] dark:hover:shadow-[0_0_40px_rgba(139,92,246,0.4)]
-                    hover:scale-105 hover:rotate-1
-                    w-[calc(50%-3rem)]
+                  className={`hover:shadow-[0_0_30px_rgba(16,185,129,0.18)] dark:hover:shadow-[0_0_40px_rgba(16,185,129,0.35)]
+                    hover:scale-[1.02]
+                    w-full sm:w-[calc(50%-2rem)]
                     ${isLeft ? "mr-auto" : "ml-auto"}`}
                 >
-                  <div className="text-xs uppercase tracking-wider text-pink-600 dark:text-pink-400">
+                  <div className="text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                     {it.time}
                   </div>
                   <div
                     className="mt-1 font-bold text-xl 
-                    bg-gradient-to-r from-fuchsia-500 via-indigo-400 to-cyan-400 
+                    bg-gradient-to-r from-emerald-500 via-green-400 to-teal-400 
                     bg-clip-text text-transparent"
                   >
                     {it.title}

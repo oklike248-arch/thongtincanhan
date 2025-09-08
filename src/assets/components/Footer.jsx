@@ -14,16 +14,16 @@ function Footer() {
       className="relative border-t border-zinc-200 dark:border-zinc-800 overflow-hidden"
     >
       {/* Animated Glow background */}
-      <div className="absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10 blur-3xl opacity-60" />
+      <div className="absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-emerald-500/20 via-green-500/20 to-teal-500/20 blur-3xl opacity-70" />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 text-sm flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 text-sm flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4 sm:gap-6">
         {/* Copyright */}
-        <div className="text-center md:text-left font-medium bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent animate-gradient-x">
+        <div className="text-center md:text-left font-medium bg-gradient-to-r from-emerald-400 via-green-500 to-teal-500 bg-clip-text text-transparent animate-gradient-x">
           © {new Date().getFullYear()} NekoTheDev. All rights reserved.
         </div>
 
         {/* Social links */}
-        <div className="flex justify-center md:justify-end items-center gap-6">
+        <div className="flex justify-center md:justify-end items-center gap-5 sm:gap-6">
           {[
             { icon: Github, href: "https://github.com/" },
             { icon: Linkedin, href: "https://linkedin.com/" },
@@ -34,9 +34,9 @@ function Footer() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, rotate: 8 }}
+              whileHover={{ scale: 1.15, rotate: 6 }}
               whileTap={{ scale: 0.95 }}
-              className="text-zinc-500 hover:text-zinc-900 dark:hover:text-emerald-300 transition-colors"
+              className="text-zinc-500 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
             >
               <Icon className="w-6 h-6 sm:w-5 sm:h-5" />
             </motion.a>

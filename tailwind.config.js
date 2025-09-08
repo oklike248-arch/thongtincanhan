@@ -8,6 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        handlee: ["Handlee", "cursive"],      // cho title
+        orbitron: ["Orbitron", "sans-serif"], // cho subtitle
         sans: ["Inter", "sans-serif"],
       },
       keyframes: {
@@ -31,8 +33,8 @@ export default {
         fadeDown: "fadeDown 0.5s ease-out forwards",
       },
       colors: {
-        cream: "#FFFDF5",     // nền sáng
-        blackpure: "#000000", // nền tối
+        cream: "#FFFDF5",
+        blackpure: "#000000",
         lightBg: "#ffffff",
         darkBg: "#0a0a0a",
       },

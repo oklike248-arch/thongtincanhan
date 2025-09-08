@@ -1,4 +1,5 @@
 // src/App.jsx
+import Intro from "./assets/components/Intro.jsx";
 import Navbar from "./assets/components/Navbar.jsx";
 import Hero from "./assets/components/Hero.jsx";
 import About from "./assets/components/About.jsx";
@@ -16,6 +17,7 @@ function App() {
 
       {/* Sections */}
       <main>
+        <Intro />
         <Hero />
         <About />
         <Skills />

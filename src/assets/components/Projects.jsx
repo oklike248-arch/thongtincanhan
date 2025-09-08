@@ -38,7 +38,7 @@ function Projects() {
   };
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-4 sm:px-6 py-20">
+    <section id="projects" className="mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-28">
       {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -47,10 +47,10 @@ function Projects() {
         transition={{ duration: 0.7 }}
         className="text-center mb-14"
       >
-        <p className="text-indigo-500 font-medium tracking-wide uppercase">
+        <p className="text-emerald-500 font-medium tracking-wide uppercase">
           Dự án
         </p>
-        <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+        <h2 className="text-3xl md:text-5xl font-bold font-display bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 bg-clip-text text-transparent">
           Một vài sản phẩm nổi bật
         </h2>
       </motion.div>
@@ -69,21 +69,19 @@ function Projects() {
               bg-gradient-to-br from-white to-zinc-50 
               dark:from-zinc-900/80 dark:to-zinc-950/90 
               border border-zinc-200 dark:border-zinc-700 
-              shadow-xl hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.6)] 
+              shadow-xl hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.55)] 
               transition-all duration-500"
           >
-            {/* Fake thumbnail */}
+            {/* Thumbnail */}
             <motion.div
-              className="aspect-video w-full rounded-xl mb-5 
-                bg-gradient-to-tr from-pink-400/40 via-purple-400/30 to-indigo-400/40 
-                dark:from-pink-600/30 dark:via-purple-600/20 dark:to-indigo-600/30"
-              whileHover={{ scale: 1.05 }}
+              className="aspect-video w-full rounded-xl mb-5 overflow-hidden bg-zinc-100 dark:bg-zinc-900"
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="flex items-center justify-center h-full text-4xl">📷</div>
+              <img src="/pro.jpg" alt={p.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
             </motion.div>
 
             {/* Title & Desc */}
-            <h3 className="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
+            <h3 className="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 font-display">
               {p.title}
             </h3>
             <p className="mt-2 text-base text-zinc-700 dark:text-zinc-400 leading-relaxed">
@@ -110,7 +108,7 @@ function Projects() {
                 href={p.demo}
                 whileHover={{ scale: 1.07 }}
                 className="rounded-xl px-4 py-2 text-sm font-medium 
-                  bg-gradient-to-r from-indigo-500 to-purple-600 
+                  bg-gradient-to-r from-emerald-500 to-teal-600 
                   text-white shadow-md hover:shadow-lg transition-all"
               >
                 🚀 Demo
@@ -121,7 +119,7 @@ function Projects() {
                 className="rounded-xl px-4 py-2 text-sm font-medium 
                   border border-zinc-300 dark:border-zinc-700 
                   text-zinc-900 dark:text-zinc-200 
-                  hover:bg-zinc-100 dark:hover:bg-zinc-800 
+                  hover:bg-emerald-50 dark:hover:bg-emerald-900/30 
                   transition-colors"
               >
                 💻 Code
