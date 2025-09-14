@@ -1,13 +1,11 @@
 <h1 align="center">
-  <img src="./public/cute.jpg" alt="Logo" width="30" height="30">
+  <img src="./public/cute.jpg" alt="Logo" width="40" height="40">
   New-Port
 </h1>
 
-
-
 <p align="center">
-  Một trang web giới thiệu bản thân với
-  <a href="https://vite.dev/">Vite</a> và được deploy trên <a href="https://vercel.com/">Vercel</a>.
+  🚀 Một trang web giới thiệu bản thân được xây dựng với 
+  <a href="https://vite.dev/">Vite</a> và deploy trên <a href="https://vercel.com/">Vercel</a>.
 </p>
 
 <p align="center">
@@ -29,38 +27,46 @@
 
 ## 📸 Xem trước
 
-🔗 **Bản demo:** [(https://github.com/NekoTheDev/New-Port)](https://new-port-ashen.vercel.app/))
+- 🔗 **Demo Website:** [new-port-mu.vercel.app](https://new-port-mu.vercel.app/)  
+- 📂 **Source Code:** [GitHub Repo](https://github.com/NekoTheDev/New-Port)
+
+---
+
+## ✨ Tính năng
+
+- 🖼️ Giao diện portfolio cá nhân hiện đại  
+- 📱 Responsive trên mọi thiết bị  
+- ⚡ Hiệu năng nhanh nhờ Vite  
+- 🌐 Deploy dễ dàng với Vercel  
 
 ---
 
 ## 🛠️ Công nghệ
 
 <p align="center">
-  <img src="https://img.icons8.com/?size=100&id=dJjTWMogzFzg&format=png&color=000000" width=40/>
-  <img src="https://img.icons8.com/?size=100&id=123603&format=png&color=000000" width=40/>
-  <img src="https://img.icons8.com/?size=100&id=4PiNHtUJVbLs&format=png&color=000000" width=40/>
+  <img src="https://img.icons8.com/?size=100&id=dJjTWMogzFzg&format=png&color=000000" width=40 title="Vite"/>
+  <img src="https://img.icons8.com/?size=100&id=123603&format=png&color=000000" width=40 title="React"/>
+  <img src="https://img.icons8.com/?size=100&id=4PiNHtUJVbLs&format=png&color=000000" width=40 title="TailwindCSS"/>
 </p>
 
 ---
 
+## 🚀 Cài đặt & Chạy dự án
 
-## 🚀 Cách tải dự án
-
-### 1️⃣ Sao chép dự án
 ```bash
+# Sao chép repo
 git clone https://github.com/NekoTheDev/New-Port.git
 cd New-Port
 
-Tải các thành phần
+# Cài dependencies
 npm install
 
-Chạy web local
+# Chạy local
 npm run dev
 
-Xây dựng dản phẩm
+# Build production
 npm run build
 ```
-
 ---
 
 ### 6. Liên lạc
@@ -73,5 +79,6 @@ npm run build
 ---
 ```
 ✨ Nếu bạn thích dự án này, có thể để lại cho mình 1 sao nhé!
+
 ✨ Nếu các bạn muốn hợp tác phát triển với mình thì có thể liên lạc qua gmail của mình!
 ```
