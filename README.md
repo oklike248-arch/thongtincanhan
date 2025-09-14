@@ -69,7 +69,7 @@ npm run build
 ```
 ---
 
-### 6. Liên lạc
+###  Liên lạc
 ```markdown
 ## 
 
